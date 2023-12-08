@@ -39,6 +39,20 @@ csv_dataframes = []
 for csv in csv_files:
     csv_dataframes.append(pd.read_csv(csv))
 
-agent = create_pandas_dataframe_agent(OpenAI(temperature=0), csv_dataframes, verbose=True)
-agent.run("how many times El Salvador appears in Pais column in all the data?")
+agent = create_pandas_dataframe_agent(OpenAI(temperature=0), csv_dataframes, verbose=False)
 
+def ask(query):
+    response = agent.run(query)
+    return response
+
+while True:
+    question = input("Ask question: \n")
+    if question=='quit':
+        break
+    else:
+        try:
+            response = ask(query=question)
+            print(response)
+
+        except(Exception) as e:
+            print('Sorry: LLM could not figure out. May be the prompt is very large. Please try with different prompt.')
