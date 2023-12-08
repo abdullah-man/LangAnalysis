@@ -15,6 +15,7 @@ files = os.listdir(excel_folder_path)
 # Excel Loader
 loaders = [UnstructuredExcelLoader(os.path.join(excel_folder_path, fn), mode='elements') for fn in os.listdir(excel_folder_path)]
 print(loaders)
+from langchain.vectorstores.utils import filter_complex_metadata
 
 # Vector Store Creation
 index = VectorstoreIndexCreator().from_loaders(loaders)
