@@ -1,0 +1,8 @@
+- Set API and global var management                                         DONE
+- Upload file and view as pandas dataframes - INSP : MultichatCSVPandasAI   DONE                          
+- Set pandas dataframes as global list                                      DONE                                      
+- Display problematic sheets alongwith their respective file names         
+- Chat view creation and display                                        
+- Implementation of chat successfully                                   
+- GUI Code refactoring and Testing
+- Build creation 
