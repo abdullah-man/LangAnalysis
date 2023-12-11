@@ -2,7 +2,7 @@
 - Upload file and view as pandas dataframes - INSP : MultichatCSVPandasAI   DONE                          
 - Set pandas dataframes as global list                                      DONE                                      
 - Display problematic sheets alongwith their respective file names         
-- Chat view creation and display                                        
-- Implementation of chat successfully                                   
+- Chat view creation and display                                            DONE                                     
+- Implementation of chat successfully                                       DONE                                  
 - GUI Code refactoring and Testing
 - Build creation 

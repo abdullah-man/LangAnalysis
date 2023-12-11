@@ -128,28 +128,22 @@ if (selected_section == "Upload Files") and (st.session_state['API_BOOL'] is Tru
 
 # if Files already uploaded then open this section
 if (selected_section == "Ask Query"): 
-    input_text = st.text_area("Enter the query")
+    # Chat Agent Creation
+    pd_agent = create_agent(dataframes_list=st.session_state['ALL_DF'], API_KEY=st.session_state['API_KEY_SET'], hallucination=0.0)    
     
     # Ask questions / chat
-    if input_text:
-        if st.button("Chat with data"):
-            st.info("Your Query: "+ input_text)
-            st.success("This is reply.")
-
+    input_text = st.text_area("Enter the query")
     
-    # api_key = st.text_input("Enter API Key:")
-    # # Case : if API key not already set
-    # if st.button("Submit"):
-    #     # if a value is entered as API key and it starts with sk- then:
-    #     if (api_key) and api_key.startswith('sk-'): 
-    #         st.session_state['API_KEY_SET'] = api_key
-    #         st.session_state['API_BOOL'] = True
-    #         st.success(f"API Key set successfully as {st.session_state['API_KEY_SET']}")
-        
-    #     # if it is empty or does not start with sk- then:
-    #     else:
-    #         st.error("Please enter a valid API Key.")
-    #         st.error(f"Please try again. You entered: {api_key}")
+    if st.button("Ask from data"):
+        if input_text:
+            st.info("Your Query: "+ input_text)
+
+            # asking agent
+            with st.spinner('Thinking ...'):
+                response = ask_agent(agent=pd_agent, query=input_text)
+                st.success(response)
+
+
 
 # To Run:
 # streamlit run main.py --server.maxUploadSize 1000
