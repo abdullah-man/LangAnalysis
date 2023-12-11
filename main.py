@@ -8,8 +8,8 @@ from langchain.llms import OpenAI
 from key import save_api_key, read_api_key
 
 # OpenAPI Key
-OPENAI_API_KEY = "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"
-os.environ['OPENAI_API_KEY'] = OPENAI_API_KEY 
+# OPENAI_API_KEY = "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"
+# os.environ['OPENAI_API_KEY'] = OPENAI_API_KEY 
 
 # setting streamlit app configurations for title and icon
 st.set_page_config(
@@ -127,7 +127,7 @@ if (selected_section == "Upload Files") and (st.session_state['API_BOOL'] is Tru
 # --------------------- SECTION : Ask Queries / Chat ---------------------
 
 # if Files already uploaded then open this section
-if (selected_section == "Ask Query"): 
+if (selected_section == "Ask Query") and (st.session_state['Uploaded'] is True): 
     # Chat Agent Creation
     pd_agent = create_agent(dataframes_list=st.session_state['ALL_DF'], API_KEY=st.session_state['API_KEY_SET'], hallucination=0.0)    
     

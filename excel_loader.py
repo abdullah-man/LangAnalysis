@@ -6,7 +6,7 @@ from typing import List
 import pandas as pd
 
 
-def load_excel(excel_file) -> dict | None:
+def load_excel(excel_file):
     """
     Loads excel sheet by sheet in dataframes and return the list of dataframes
     params:
