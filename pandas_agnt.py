@@ -35,7 +35,6 @@ def ask_agent(agent, query) -> str:
         response = agent.run(query)
         return response
     except (Exception) as e:
-        resp = """There was some issue in generating the information asked for.
-                Please rephrase your query. If the query is very long make it short."""
+        resp = """Error establishing connection with ChatGPT. Please check if your API Key is correct and try again."""
         return resp
 

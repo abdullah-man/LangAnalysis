@@ -1,15 +1,7 @@
-import pandas as pd
-import os
 from excel_loader import load_excel
 from pandas_agnt import create_agent, ask_agent
 
 import streamlit as st
-from langchain.llms import OpenAI
-from key import save_api_key, read_api_key
-
-# OpenAPI Key
-# OPENAI_API_KEY = "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"
-# os.environ['OPENAI_API_KEY'] = OPENAI_API_KEY 
 
 # setting streamlit app configurations for title and icon
 st.set_page_config(
@@ -35,12 +27,8 @@ st.markdown(hide_streamlit_style, unsafe_allow_html=True)
 # st.sidebar.title("Sections")
 selected_section = st.sidebar.radio("Section Selection", ("Set API Key", "Upload Files", "Ask Query"))
 
-# # Main content
+# Main content
 st.title(selected_section)
-
-# Data 
-all_data_frames = list()
-error_sheet_info = dict()
 
 # Setting API_KEY_SET as session variables to be accessed and set globally in streamlit application 
 if ('API_KEY_SET' and 'API_BOOL' and 'Uploaded' and 'ALL_DF') not in st.session_state: 
@@ -142,8 +130,3 @@ if (selected_section == "Ask Query") and (st.session_state['Uploaded'] is True):
             with st.spinner('Thinking ...'):
                 response = ask_agent(agent=pd_agent, query=input_text)
                 st.success(response)
-
-
-
-# To Run:
-# streamlit run main.py --server.maxUploadSize 1000
