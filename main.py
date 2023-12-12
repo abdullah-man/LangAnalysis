@@ -31,11 +31,12 @@ selected_section = st.sidebar.radio("Section Selection", ("Set API Key", "Upload
 st.title(selected_section)
 
 # Setting API_KEY_SET as session variables to be accessed and set globally in streamlit application 
-if ('API_KEY_SET' and 'API_BOOL' and 'Uploaded' and 'ALL_DF') not in st.session_state: 
+if ('API_KEY_SET' and 'API_BOOL' and 'Uploaded' and 'ALL_DF' and 'Erro_SHT') not in st.session_state: 
     st.session_state['API_KEY_SET'] = ""
     st.session_state['API_BOOL'] = False
     st.session_state['Uploaded'] = False
     st.session_state['ALL_DF'] = list()
+    st.session_state['Erro_SHT'] = list()
 
 
 # --------------------- SECTION : Set API Key ---------------------
@@ -92,7 +93,8 @@ if (selected_section == "Upload Files") and (st.session_state['API_BOOL'] is Tru
 
                     # Handling Error Sheets
                     # error_sheets = load_response['error_sheets']
-                    # error_sheet_info[file] = error_sheets
+                    # if len(error_sheets)>0: # if error_sheets list contains info
+                    #     st.session_state['Erro_SHT'].append({file.name : error_sheets})
                     
                     st.success(f"File {file.name} successfully opened.")
                 
@@ -100,13 +102,18 @@ if (selected_section == "Upload Files") and (st.session_state['API_BOOL'] is Tru
                 if load_response is None:
                     st.error(f"File {file.name} could not be opened.")
 
-    
+
+    # Displaying list of error sheets
+    # if len(st.session_state['Erro_SHT']) > 0:
+    #     st.write("These sheets in files have problem opening:")
+    #     st.write(str(st.session_state['Erro_SHT']))
+
     # Setting Uploaded to True if any dataframe was added to st.session_state['ALL_DF'] varibale
     # This means now we can perform queries on this dataframe
     if len(st.session_state['ALL_DF']) > 0: # if this list contain any dataframe then:
         st.session_state['Uploaded'] = True
         st.success("Files Uploaded and Opened Successfully!")
-        
+    
         # displaying data for checking
         for df in st.session_state['ALL_DF']:
             st.dataframe(df, use_container_width=True)
