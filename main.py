@@ -123,13 +123,22 @@ if (selected_section == "Upload Files") and (st.session_state['API_BOOL'] is Tru
 
 # if Files already uploaded then open this section
 if (selected_section == "Ask Query") and (st.session_state['Uploaded'] is True): 
+    
+    def clear_text():
+        """
+        Inner function to reset the text appearing in the input_text field
+        """
+        st.session_state["input"] = ""
+
     # Chat Agent Creation
     pd_agent = create_agent(dataframes_list=st.session_state['ALL_DF'], API_KEY=st.session_state['API_KEY_SET'], hallucination=0.0)    
     
     # Ask questions / chat
-    input_text = st.text_area("Enter the query")
+    input_text = st.text_area("Enter the query", key='input')
     
-    if st.button("Ask from data"):
+    col_1, col_2, col_3, col_4 = st.columns(4) # making additional 2 columns to make the two buttons appear close to each other
+
+    if col_1.button("Ask from data"):
         if input_text:
             st.info("Your Query: "+ input_text)
 
@@ -137,3 +146,6 @@ if (selected_section == "Ask Query") and (st.session_state['Uploaded'] is True):
             with st.spinner('Thinking ...'):
                 response = ask_agent(agent=pd_agent, query=input_text)
                 st.success(response)
+    
+    if col_2.button("Clear Text", on_click=clear_text):
+        pass
