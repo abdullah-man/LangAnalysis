@@ -47,7 +47,7 @@ if (selected_section == "Set API Key"):
     if st.session_state['API_BOOL']:
         st.success(f"API Key set successfully as {st.session_state['API_KEY_SET']}")
     
-    api_key = st.text_input("Enter API Key:")
+    api_key = st.text_input("Enter API Key:", type="password")
     # Case : if API key not already set
     if st.button("Submit"):
         # if a value is entered as API key and it starts with sk- then:
