@@ -18,7 +18,12 @@ def create_agent(dataframes_list : List[pd.DataFrame], API_KEY : str, hallucinat
     returns:
         A pandas dataframe agent instance.
     """
-    agent = create_pandas_dataframe_agent(OpenAI(temperature=hallucination, openai_api_key=API_KEY), dataframes_list, verbose=False)
+    agent = create_pandas_dataframe_agent(
+        OpenAI(temperature=hallucination, openai_api_key=API_KEY),
+        dataframes_list,
+        verbose=False,
+        allow_dangerous_code=True,
+        )
     return agent
 
 
